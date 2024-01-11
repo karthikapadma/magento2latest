@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!-- this will create a cron job that runs in every minute -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="out_of_stock_cronjob" instance="Vendor\Module\Cron\OutOfStockCron" method="execute">
+            <schedule>1 * * * *</schedule>
+        </job>
+    </group>
+</config>
