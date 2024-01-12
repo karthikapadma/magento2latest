@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<!--
+	<type name="Vendor\Module\Logger\Handler">
+	<arguments>
+	<argument name="filesystem" xsi:type="object">
+	Magento\Framework\Filesystem\Driver\File
+	</argument>
+	</arguments>
+	</type>
+	-->
+	<type name="Psr\Log\LoggerInterface">
+		<arguments>
+			<argument name="name" xsi:type="string">
+				custom_cron_stock
+			</argument>
+			<argument name="handlers" xsi:type="array">
+				<item name="custom" xsi:type="object">
+					Vendor\Module\Logger\Handler\Handler
+				</item>
+			</argument>
+		</arguments>
+	</type>
+</config>
