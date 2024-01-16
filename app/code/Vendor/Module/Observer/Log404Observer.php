@@ -52,14 +52,14 @@ class Log404Observer implements ObserverInterface
             // URL already exists, update the attempt count
             $connection->update(
                 $tableName,
-                ['attempt_count' => $row['attempt_count'] + 1],
-                ['id = ?' => $row['id']]
+                ['count' => $row['count'] + 1],
+                ['entity_id = ?' => $row['entity_id']]
             );
         } else {
             // URL does not exist, insert a new record
             $connection->insert(
                 $tableName,
-                ['url' => $url, 'attempt_count' => 1]
+                ['url' => $url, 'count' => 1]
             );
         }
     }
