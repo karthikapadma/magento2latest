@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Vendor_Module::menu" title="404 logs" translate="title" module="Vendor_Module" sortOrder="10" resource="Vendor_Module::menu"/>
+        <add id="Vendor_Module::submenu_module"
+           title="404 logs" translate="title" module="Vendor_Module"
+           sortOrder="20" parent="Vendor_Module::menu"
+           action="module/create/index"
+           resource="Vendor_Module::submenu_module"/>
+    </menu>
+</config>
