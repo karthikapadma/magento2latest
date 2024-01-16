@@ -3,13 +3,13 @@
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="Vendor_Module_create_listing_data_source" xsi:type="string">Vendor\Module\Model\ResourceModel\View\Collection</item>
+                <item name="vendor_module_create_listing_data_source" xsi:type="string">Vendor\Module\Model\ResourceModel\View\Collection</item>
             </argument>
         </arguments>
     </type>
     <virtualType name="Vendor\Module\Model\ResourceModel\View\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
-            <argument name="mainTable" xsi:type="string">Vendor_article</argument>
+            <argument name="mainTable" xsi:type="string">log_404_logs</argument>
             <argument name="resourceModel" xsi:type="string">Vendor\Module\Model\ResourceModel\View</argument>
         </arguments>
     </virtualType>
