@@ -5,18 +5,22 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Psr\Log\LoggerInterface;
 use Magento\Framework\App\ResourceConnection;
+use  Vendor\Module\Model\View;
 
 class Log404Observer implements ObserverInterface
 {
     protected $logger;
     protected $resourceConnection;
+    protected $viewModel;
 
     public function __construct(
         LoggerInterface $logger,
-        ResourceConnection $resourceConnection
+        ResourceConnection $resourceConnection,
+        View $viewModel
     ) {
         $this->logger = $logger;
         $this->resourceConnection = $resourceConnection;
+        $this->viewModel = $viewModel;
     }
 
     public function execute(Observer $observer)
@@ -29,38 +33,11 @@ class Log404Observer implements ObserverInterface
 
             if ($statusCode == 404) {
                 $request = $observer->getEvent()->getData('request');
-                $uri = $request->getUriString();
+                $url = $request->getUriString();
 
                 // Log the URL to the database
-                $this->logAttemptedUrl($uri);
+                $this->viewModel->logAttemptedUrl($url);
             }
-        }
-    }
-
-    protected function logAttemptedUrl($url)
-    {
-        $connection = $this->resourceConnection->getConnection();
-        $tableName = $connection->getTableName('log_404_logs');
-
-        $select = $connection->select()
-            ->from($tableName)
-            ->where('url = ?', $url);
-
-        $row = $connection->fetchRow($select);
-
-        if ($row) {
-            // URL already exists, update the attempt count
-            $connection->update(
-                $tableName,
-                ['count' => $row['count'] + 1],
-                ['entity_id = ?' => $row['entity_id']]
-            );
-        } else {
-            // URL does not exist, insert a new record
-            $connection->insert(
-                $tableName,
-                ['url' => $url, 'count' => 1]
-            );
         }
     }
 }
